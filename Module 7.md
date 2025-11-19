@@ -15,14 +15,41 @@ Else
 6.	Return 0
  
 Program:
+~~~
+#include <stdio.h>
+struct eligible {
+    int age;
+    char name[50];
+};
+int main() {
+    struct eligible e[100];
+    int n, i;
+    printf("Enter number of persons: ");
+    scanf("%d", &n);
 
-//type your code here
+    for(i = 0; i < n; i++) {
+        printf("\nEnter name of person %d: ", i+1);
+        scanf("%s", e[i].name);
+
+        printf("Enter age of %s: ", e[i].name);
+        scanf("%d", &e[i].age);
+    }
+    printf("\n--- VACCINE ELIGIBILITY RESULT ---\n");
+    for(i = 0; i < n; i++) {
+        printf("\nName: %s\n", e[i].name);
+        printf("Age: %d\n", e[i].age);
+        if(e[i].age <= 6)
+            printf("Vaccine Eligibility: No\n");
+        else
+            printf("Vaccine Eligibility: Yes\n");
+    }
+    return 0;
+}
+~~~
 
 
-Output:
-
-//paste your output here
-
+Output:<br>
+<img width="695" height="593" alt="image" src="https://github.com/user-attachments/assets/9536c88c-21fc-443b-a998-607f017d170e" />
 
 Result:
 Thus, the program is verified successfully. 
@@ -43,19 +70,29 @@ Algorithm:
 7.	Return 0
  
 Program:
+~~~
+#include <stdio.h>
+struct numbers {
+    int a, b, sum;
+};
+struct numbers add(struct numbers n) {
+    n.sum = n.a + n.b; 
+    return n;          
+}
+int main() {
+    struct numbers n, result;
+    printf("Enter value for a: ");
+    scanf("%d", &n.a);
+    printf("Enter value for b: ");
+    scanf("%d", &n.b);
+    result = add(n);
+    printf("\nThe sum of %d and %d is: %d\n", result.a, result.b, result.sum);
+    return 0;
+}
+~~~
 
-//type your code here
-
-
-
-
-Output:
-
-
-//paste your output here
-
-
-
+Output:<br>
+<img width="526" height="214" alt="image" src="https://github.com/user-attachments/assets/a965804e-a26d-4bd5-97f1-826a6aebb9f6" />
 
 Result:
 Thus, the program is verified successfully
@@ -85,26 +122,28 @@ Use scanf to input the file name into the name array.
 5.	Return 0 to indicate successful program execution.
  
 Program:
+~~~
+#include <stdio.h>
+int main() {
+    FILE *p;
+    char name[50];
+    printf("Enter the file name to create: ");
+    scanf("%s", name);
+    printf("\nCreating file: %s\n", name);
+    p = fopen(name, "w");
+    if (p == NULL) {
+        printf("Error! Unable to create the file.\n");
+        return 1; 
+    }
+    printf("File opened successfully.\n");
+    fclose(p);
+    printf("File closed successfully.\n");
+    return 0;
+}
+~~~
 
-//type your code here
-
-
-
-
-Output:
-
-
-//paste your output here
-
-
-
-
-
-
-
-
-
-
+Output:<br>
+<img width="544" height="191" alt="image" src="https://github.com/user-attachments/assets/79ee16d1-eca6-4a0f-b2ac-7271832e1c79" />
 
 Result:
 Thus, the program is verified successfully
@@ -132,20 +171,38 @@ Use scanf to input the file name into the name array and the number of strings i
 5.	Return 0 to indicate successful program execution.
  
 Program:
+~~~
+#include <stdio.h>
+int main() {
+    FILE *p;
+    char name[50], text[100];
+    int num, i;
+    printf("Enter the file name: ");
+    scanf("%s", name);
 
-//type your code here
+    printf("Enter number of lines to write: ");
+    scanf("%d", &num);
+    p = fopen(name, "w");
+    if (p == NULL) {
+        printf("Error! Cannot open file.\n");
+        return 1;
+    }
+    printf("\nFile '%s' opened successfully.\n", name);
+    printf("Enter the text lines:\n");
+    for (i = 0; i < num; i++) {
+        printf("Line %d: ", i + 1);
+        scanf(" %[^\n]", text);
+        fputs(text, p);
+        fputs("\n", p);
+    }
+    fclose(p);
+    printf("\nData added successfully to '%s'.\n", name);
+    return 0;
+}
+~~~
 
-
-
-
-Output:
-
-
-//paste your output here
-
-
-
-
+Output:<br>
+<img width="685" height="335" alt="image" src="https://github.com/user-attachments/assets/aeaf9b28-0077-4d40-b3a3-c8dc8e777b10" />
 
 
 Result:
@@ -186,20 +243,43 @@ Algorithm:
 13.End the program by returning 0.
 
 Program:
+~~~
+#include <stdio.h>
+#include <stdlib.h>
+struct subject {
+    char name[50];
+    int marks;
+};
+int main() {
+    struct subject *s;
+    int n, i;
+    printf("Enter number of subjects: ");
+    scanf("%d", &n);
+    s = (struct subject *)malloc(n * sizeof(struct subject));
+    if (s == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+    printf("\nEnter subject name and marks:\n");
+    for (i = 0; i < n; i++) {
+        printf("\nSubject %d name: ", i + 1);
+        scanf("%s", s[i].name);
 
-//type your code here
+        printf("Marks for %s: ", s[i].name);
+        scanf("%d", &s[i].marks);
+    }
+    printf("\n--- SUBJECT DETAILS ---\n");
+    for (i = 0; i < n; i++) {
+        printf("\nSubject Name: %s\n", s[i].name);
+        printf("Marks: %d\n", s[i].marks);
+    }
+    free(s);
+    return 0;
+}
+~~~
 
-
-
-
-Output:
-
-
-//paste your output here
-
-
-
-
+Output:<br>
+<img width="647" height="557" alt="image" src="https://github.com/user-attachments/assets/9a3b326f-3430-4f15-9ec9-3dd14caea409" />
 
 
 Result:
